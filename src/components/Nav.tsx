@@ -12,6 +12,8 @@ export default function Nav(){
           <Link href='/benchmarks'>Benchmarks</Link>
           <Link href='/companies'>Companies</Link>
           <Link href='/reviews'>Reviews</Link>
+          <Link href='/login'>Login</Link>
+          <Link href='/signup'>Sign up</Link>
           <Link href='/list-agent' className='btn-primary'>List Your Agent</Link>
         </div>
       </div>
