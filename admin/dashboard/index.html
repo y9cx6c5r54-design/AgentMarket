@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgentMarket Admin Dashboard</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:#0b1020;color:#e8ecff;margin:0}
+    .wrap{max-width:920px;margin:32px auto;padding:0 16px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .card{margin-top:16px;background:#121a33;border:1px solid #263056;border-radius:14px;padding:18px}
+    pre{white-space:pre-wrap;word-wrap:break-word;background:#0d1430;border-radius:10px;padding:12px;border:1px solid #33406f}
+    button{padding:9px 12px;border:0;border-radius:8px;background:#6d7cff;color:#fff;cursor:pointer}
+    .secondary{background:#33406f}
+    .muted{color:#aab6e6}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Admin Dashboard</h1>
+      <div>
+        <button class="secondary" id="refresh">Refresh</button>
+        <button id="logout">Logout</button>
+      </div>
+    </div>
+    <p class="muted">Connected to <code>/api/admin/dashboard</code></p>
+    <div class="card">
+      <h3>Response</h3>
+      <pre id="out">Loading...</pre>
+    </div>
+  </div>
+
+  <script>
+    const out = document.getElementById('out');
+    const token = localStorage.getItem('agentmarket_token');
+
+    if(!token){
+      location.href = '/admin';
+    }
+
+    async function load(){
+      out.textContent = 'Loading...';
+      try {
+        const r = await fetch('/api/admin/dashboard', {
+          headers: { Authorization: 'Bearer ' + token }
+        });
+        const data = await r.json();
+        if(!r.ok){
+          if(r.status===401){
+            localStorage.removeItem('agentmarket_token');
+            location.href='/admin';
+            return;
+          }
+          throw new Error(data.error || 'Request failed');
+        }
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        out.textContent = 'Error: ' + (e.message || 'Unknown error');
+      }
+    }
+
+    document.getElementById('refresh').onclick = load;
+    document.getElementById('logout').onclick = () => {
+      localStorage.removeItem('agentmarket_token');
+      localStorage.removeItem('agentmarket_user');
+      location.href='/admin';
+    };
+
+    load();
+  </script>
+</body>
+</html>
