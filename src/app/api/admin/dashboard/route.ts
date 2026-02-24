@@ -1,0 +1,2 @@
+import { NextRequest, NextResponse } from 'next/server'; import { verify } from '../../../../lib/auth';
+export async function GET(req:NextRequest){const h=req.headers.get('authorization')||''; const t=h.startsWith('Bearer ')?h.slice(7):''; const u=t?verify(t):null; if(!u) return NextResponse.json({error:'Invalid or missing token'},{status:401}); return NextResponse.json({message:'Welcome to AgentMarket admin backend',user:u,runtime:'vercel'})}
