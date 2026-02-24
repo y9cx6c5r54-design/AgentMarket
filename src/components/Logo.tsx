@@ -1,7 +1,7 @@
 export default function Logo(){
   return (
-    <div style={{display:'inline-flex',alignItems:'center',gap:10,fontWeight:700}}>
-      <svg viewBox='0 0 64 64' width='30' height='30' aria-hidden>
+    <div className='logo-wrap'>
+      <svg className='logo-icon' viewBox='0 0 64 64' aria-hidden>
         <rect x='18' y='12' width='28' height='26' rx='4' fill='#D1866E'/>
         <line x1='32' y1='12' x2='32' y2='6' stroke='#D1866E' strokeWidth='2' strokeLinecap='round'/>
         <circle cx='32' cy='4' r='2.3' fill='#efb09c'/>
@@ -11,7 +11,7 @@ export default function Logo(){
         <line x1='18' y1='25' x2='12' y2='25' stroke='#D1866E' strokeWidth='2.6' strokeLinecap='round'/>
         <line x1='46' y1='25' x2='52' y2='25' stroke='#D1866E' strokeWidth='2.6' strokeLinecap='round'/>
       </svg>
-      <span style={{fontSize:24,lineHeight:1}}><span style={{color:'#D1866E'}}>Agent</span> <span style={{color:'#22252b'}}>Market</span></span>
+      <span className='logo-text'><span style={{color:'#D1866E'}}>Agent</span> <span style={{color:'#22252b'}}>Market</span></span>
     </div>
   )
 }
