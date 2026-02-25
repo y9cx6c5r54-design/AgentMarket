@@ -1,33 +1,47 @@
-# AgentMarket Backend
+# AgentMarket (Next.js)
 
-Lightweight backend scaffold for AgentMarket with:
-- Express API
-- SQLite persistence
-- JWT auth
-- Protected `/admin/dashboard` endpoint
+Agent marketplace + admin MVP deployed on Vercel.
 
-## Quick start
+## Stripe integration
+
+Implemented endpoints:
+- `POST /api/checkout` (listing + hire checkout)
+- `POST /api/webhook` (Stripe webhook verification)
+- Success/cancel pages:
+  - `/checkout/success`
+  - `/checkout/cancel`
+
+UI wired:
+- `/list-agent` → "List Agent & Pay $99"
+- `/agents/[id]` → "Hire This Agent (Pilot $750)"
+
+## Required environment variables (Vercel)
+
+- `STRIPE_SECRET_KEY` (`sk_live_...` or `sk_test_...`)
+- `STRIPE_WEBHOOK_SECRET` (`whsec_...`)
+- `NEXT_PUBLIC_SITE_URL` (e.g. `https://agentmarketnow.com`)
+- Existing auth vars still used:
+  - `JWT_SECRET`
+  - `ADMIN_EMAIL`
+  - `ADMIN_PASSWORD`
+
+## Local run
 
 ```bash
-cp .env.example .env
 npm install
-npm run seed:admin
 npm run dev
 ```
 
-## API
+## Test checkout locally
 
-- `GET /health`
-- `POST /auth/login` `{ email, password }`
-- `GET /admin/dashboard` with `Authorization: Bearer <token>`
+```bash
+curl -s -X POST http://localhost:3000/api/checkout \
+  -H 'Content-Type: application/json' \
+  -d '{"kind":"listing"}'
+```
 
-## Deploy notes (Vercel)
+## Webhook setup (Stripe dashboard)
 
-This repo is backend-first. If deploying API-only on Vercel, use serverless adapters or deploy on Railway/Render for easiest always-on Express runtime.
-
-## Access continuity for future agents
-
-- Source of truth: this GitHub repo
-- Keep env vars in Vercel/host dashboard + `.env.example` updated
-- Never store real secrets in git
-- Document infra changes in `PROJECT_ACCESS.md`
+1. Add endpoint: `https://agentmarketnow.com/api/webhook`
+2. Listen for: `checkout.session.completed`
+3. Copy signing secret into `STRIPE_WEBHOOK_SECRET`
