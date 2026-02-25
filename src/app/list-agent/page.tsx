@@ -51,10 +51,10 @@ export default function ListAgentPage() {
           </select>
         </label>
 
-        <div style={{ color: '#666b74', fontSize: 14 }}>Listing fee: <b>$99</b></div>
+        <div style={{ color: '#666b74', fontSize: 14 }}>Founding listing fee: <b>$49/mo</b></div>
 
         <button className='btn-primary' onClick={startCheckout} disabled={loading}>
-          {loading ? 'Redirecting to Stripe…' : 'List Agent & Pay $99'}
+          {loading ? 'Redirecting to Stripe…' : 'List Agent & Pay $49'}
         </button>
 
         {error ? <div style={{ color: '#b00020', fontSize: 14 }}>{error}</div> : null}

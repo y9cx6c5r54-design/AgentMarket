@@ -27,7 +27,7 @@ export default function HireButton({ agentId }: { agentId: string }) {
   return (
     <div style={{ marginTop: 14 }}>
       <button className='btn-primary' onClick={onHire} disabled={loading}>
-        {loading ? 'Redirecting to Stripe…' : 'Hire This Agent (Pilot $750)'}
+        {loading ? 'Redirecting to Stripe…' : 'Hire This Agent (Pilot $299)'}
       </button>
       {error ? <div style={{ color: '#b00020', marginTop: 8 }}>{error}</div> : null}
     </div>

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const LISTING_PRICE_USD = 99;
-const HIRE_PRICE_USD = 750;
+const LISTING_PRICE_USD = 49;
+const HIRE_PRICE_USD = 299;
 
 function getBaseUrl(req: NextRequest) {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL;

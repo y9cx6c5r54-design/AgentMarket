@@ -12,8 +12,8 @@ Implemented endpoints:
   - `/checkout/cancel`
 
 UI wired:
-- `/list-agent` → "List Agent & Pay $99"
-- `/agents/[id]` → "Hire This Agent (Pilot $750)"
+- `/list-agent` → "List Agent & Pay $49"
+- `/agents/[id]` → "Hire This Agent (Pilot $299)"
 
 ## Required environment variables (Vercel)
 
